@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+# Based on http://kaiminghe.com/publications/eccv10guidedfilter.pdf
+# and https://github.com/pfchai/GuidedFilter
+
 from scipy.misc import imread
 import numpy             as np
 import scipy.misc        as sci
@@ -25,7 +28,7 @@ class GuidedFilter( object ):
     def box_filter( cls, image: np.ndarray, radius: int ) -> np.ndarray:
         # Apply on the row
         output = cls._filter( image, radius ) 
-        
+
         # ... then transpose and apply on the row (column actually)
         output = cls._filter( output.transpose(), radius ) 
         return output.transpose()
@@ -56,7 +59,7 @@ class GuidedFilter( object ):
 
 def main():
     image   = imread( 'cat.bmp' ).astype( np.float32 ) / 255.0
-    radius  = 3
+    radius  = 5
     epsilon = 0.05
     result  = GuidedFilter.apply(image, image, radius, epsilon)
     
