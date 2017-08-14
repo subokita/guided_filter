@@ -1,0 +1,5 @@
+tricks:
+- watchdog.tricks.ShellCommandTrick:
+    patterns        : ["*.py", "dev-tricks.yaml"]
+    shell_command   : "clear; python3 guided_filter.py"
+    wait_for_process: true
